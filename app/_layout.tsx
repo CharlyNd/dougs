@@ -3,7 +3,7 @@ import { Stack } from 'expo-router';
 import { View } from 'react-native';
 import { useCustomFonts } from '~/hooks/useFonts';
 
-export default function Layout() {
+export default function RootLayout() {
   const { fontsLoaded, onLayoutRootView } = useCustomFonts();
 
   if (!fontsLoaded) {
@@ -12,7 +12,19 @@ export default function Layout() {
 
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <Stack />
+      <Stack
+      >
+        <Stack.Screen name='index' />
+        <Stack.Screen
+          name="operation/[id]"
+          options={{
+            headerShown: true,
+            headerBackButtonDisplayMode: 'minimal',
+            headerTintColor: '#000000',
+            headerShadowVisible: false,
+          }}
+        />
+      </Stack>
     </View>
   );
 }

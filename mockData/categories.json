@@ -1,0 +1,74 @@
+[
+  {
+    "id": 2,
+    "groupId": 1,
+    "label": "Recettes encaissées",
+    "description": "Recettes de l'activité de votre entreprise."
+  },
+  {
+    "id": 7,
+    "groupId": 3,
+    "label": "Consommables",
+    "description": "Pansements, crèmes et autres consommables nécessaires pour le patient."
+  },
+  {
+    "id": 10,
+    "groupId": 2,
+    "label": "Entretien véhicule de tourisme",
+    "description": "Réparation, simple entretien ou maintenance des voitures de tourisme."
+  },
+  {
+    "id": 11,
+    "groupId": 2,
+    "label": "Entretien, réparation et maintenance",
+    "description": "Réparation, simple entretien ou maintenance du matériel ou du local. Cela concerne vos dépenses d'entretien courant et de petite réparation. <em>Ne concerne pas les véhicules</em>."
+  },
+  {
+    "id": 12,
+    "groupId": 2,
+    "label": "Interim",
+    "description": "Dépenses de personnel intérimaire ou personnel détaché d'une autre entreprise."
+  },
+  {
+    "id": 13,
+    "groupId": 2,
+    "label": "Logiciel et petit matériel informatique (non immobilisé)",
+    "description": "Petit matériel informatique et logiciel pour une somme de moins de 500 €."
+  },
+  {
+    "id": 91,
+    "groupId": 1,
+    "label": "Ventes de produits finis à 20%",
+    "description": "Ventes de produits fabriqués ou modifiés par la société soumis au taux de 20%."
+  },
+  {
+    "id": 92,
+    "groupId": 1,
+    "label": "Ventes de produits finis à 5,5%",
+    "description": "Ventes de produits fabriqués ou modifiés par la société soumis au taux de 5,5%."
+  },
+  {
+    "id": 93,
+    "groupId": 1,
+    "label": "Ventes de produits finis à 10%",
+    "description": "Ventes de produits fabriqués ou modifiés par la société soumis au taux de 10%."
+  },
+  {
+    "id": 184,
+    "groupId": 3,
+    "label": "Achat de matières premières à 20%",
+    "description": "Achats de matières à 20% de TVA destinées à être transformées en produits finis avant d'être revendues."
+  },
+  {
+    "id": 186,
+    "groupId": 3,
+    "label": "Sous-traitance",
+    "description": "Execution de tout ou partie d'un travail par une autre entreprise que la votre."
+  },
+  {
+    "id": 221,
+    "groupId": 3,
+    "label": "Achat de matières premières à 5,5%",
+    "description": "Achats de matières à 5,5% de TVA destinées à être transformées en produits finis avant d'être revendues."
+  }
+]

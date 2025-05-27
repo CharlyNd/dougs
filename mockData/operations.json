@@ -1,0 +1,386 @@
+[
+  {
+    "id": 1,
+    // "categoryId": 2,
+    "label": "Recette Juin 2024",
+    "amount": 42,
+    "description": "",
+    "date": "2024-06-03"
+  },
+  {
+    "id": 2,
+    "categoryId": 7,
+    "label": "Papetterie",
+    "amount": -540.25,
+    "description": "Une simple petite description",
+    "date": "2024-06-02"
+  },
+  {
+    "id": 3,
+    "categoryId": 10,
+    "label": "Frais Véhicule",
+    "amount": -150,
+    "description": "L'opération peut avoir un très grande description (ou mémo) qui peut être modifié par le user",
+    "date": "2024-06-02"
+  },
+  {
+    "id": 4,
+    "categoryId": 11,
+    "label": "Maintenance généraliste",
+    "amount": -239.45,
+    "description": "",
+    "date": "2024-06-01"
+  },
+  {
+    "id": 5,
+    "categoryId": 12,
+    "label": "Masse salariale - Intérim",
+    "amount": -1.25,
+    "description": "",
+    "date": "2024-05-29"
+  },
+  {
+    "id": 6,
+    "categoryId": 13,
+    "label": "Materiel Informatique",
+    "amount": -98.48,
+    "description": "Une simple petite description",
+    "date": "2024-05-28"
+  },
+  {
+    "id": 7,
+    "categoryId": 91,
+    "label": "vente Produits",
+    "amount": 190,
+    "description": "",
+    "date": "2024-05-28"
+  },
+  {
+    "id": 8,
+    "categoryId": 92,
+    "label": "Vente fournitures diverses",
+    "amount": 100.86,
+    "description": "L'opération peut avoir un très grande description (ou mémo) qui peut être modifié par le user",
+    "date": "2024-05-25"
+  },
+  {
+    "id": 9,
+    "categoryId": 93,
+    "label": "Vente alcool",
+    "amount": 59.36,
+    "description": "Une simple petite description",
+    "date": "2024-05-23"
+  },
+  {
+    "id": 10,
+    "categoryId": 184,
+    "label": "Dépenses matériaux",
+    "amount": -3948.68,
+    "description": "Une simple petite description",
+    "date": "2024-05-19"
+  },
+  {
+    "id": 11,
+    "categoryId": 186,
+    "label": "Prestataire partenaire",
+    "amount": 0,
+    "description": "",
+    "date": "2024-05-19"
+  },
+  {
+    "id": 12,
+    "categoryId": 221,
+    "label": "Achat matériaux secondaires",
+    "amount": -394.4,
+    "description": "",
+    "date": "2024-05-14"
+  },
+  {
+    "id": 13,
+    "categoryId": 2,
+    "label": "Recette Mai 2024",
+    "amount": 95.3,
+    "description": "",
+    "date": "2024-05-14"
+  },
+  {
+    "id": 14,
+    "categoryId": 7,
+    "label": "Papetterie",
+    "amount": 34,
+    "description": "",
+    "date": "2024-05-06"
+  },
+  {
+    "id": 15,
+    "categoryId": 10,
+    "label": "Frais Véhicule",
+    "amount": 0,
+    "description": "L'opération peut avoir un très grande description (ou mémo) qui peut être modifié par le user",
+    "date": "2024-05-06"
+  },
+  {
+    "id": 16,
+    "categoryId": 11,
+    "label": "Maintenance généraliste",
+    "amount": -150.5,
+    "description": "Une simple petite description",
+    "date": "2024-05-03"
+  },
+  {
+    "id": 17,
+    "categoryId": 12,
+    "label": "Masse salariale - Intérim",
+    "amount": -98.43,
+    "description": "",
+    "date": "2024-05-03"
+  },
+  {
+    "id": 18,
+    "categoryId": 13,
+    "label": "Materiel Divers",
+    "amount": -164.34,
+    "description": "",
+    "date": "2024-05-02"
+  },
+  {
+    "id": 19,
+    "categoryId": 91,
+    "label": "Vente produit",
+    "amount": 96.5,
+    "description": "Une simple petite description",
+    "date": "2024-05-02"
+  },
+  {
+    "id": 20,
+    "categoryId": 92,
+    "label": "Vente fournitures diverses",
+    "amount": 5.5,
+    "description": "",
+    "date": "2024-04-30"
+  },
+  {
+    "id": 21,
+    "categoryId": 93,
+    "label": "Vente alcool",
+    "amount": 42.5,
+    "description": "",
+    "date": "2024-04-29"
+  },
+  {
+    "id": 22,
+    "categoryId": 184,
+    "label": "Dépenses matériaux",
+    "amount": -89.2,
+    "description": "L'opération peut avoir un très grande description (ou mémo) qui peut être modifié par le user",
+    "date": "2024-04-29"
+  },
+  {
+    "id": 23,
+    "categoryId": 186,
+    "label": "Prestataire partenaire",
+    "amount": -90.2,
+    "description": "",
+    "date": "2024-04-28"
+  },
+  {
+    "id": 24,
+    "categoryId": 221,
+    "label": "Achat matériaux secondaires",
+    "amount": -12.9,
+    "description": "Une simple petite description",
+    "date": "2024-04-28"
+  },
+  {
+    "id": 25,
+    "categoryId": 2,
+    "label": "Recette Avril 2024",
+    "amount": 929.5,
+    "description": "",
+    "date": "2024-04-15"
+  },
+  {
+    "id": 26,
+    "categoryId": 7,
+    "label": "Papetterie",
+    "amount": -22.7,
+    "description": "L'opération peut avoir un très grande description (ou mémo) qui peut être modifié par le user",
+    "date": "2024-04-15"
+  },
+  {
+    "id": 27,
+    "categoryId": 10,
+    "label": "Frais Véhicule",
+    "amount": -99,
+    "description": "",
+    "date": "2024-04-12"
+  },
+  {
+    "id": 28,
+    "categoryId": 11,
+    "label": "Maintenance généraliste",
+    "amount": -9.99,
+    "description": "",
+    "date": "2024-04-09"
+  },
+  {
+    "id": 29,
+    "categoryId": 12,
+    "label": "Masse salariale - Intérim",
+    "amount": -424.99,
+    "description": "",
+    "date": "2024-04-09"
+  },
+  {
+    "id": 30,
+    "categoryId": 13,
+    "label": "Materiel Informatique",
+    "amount": -14.99,
+    "description": "Une simple petite description",
+    "date": "2024-04-09"
+  },
+  {
+    "id": 31,
+    "categoryId": 91,
+    "label": "Produits (TVA 20%)",
+    "amount": 250,
+    "description": "",
+    "date": "2024-04-08"
+  },
+  {
+    "id": 32,
+    "categoryId": 92,
+    "label": "Vente fournitures diverses",
+    "amount": 2993,
+    "description": "",
+    "date": "2024-04-02"
+  },
+  {
+    "id": 33,
+    "categoryId": 93,
+    "label": "Vente alcool",
+    "amount": 87,
+    "description": "",
+    "date": "2024-04-02"
+  },
+  {
+    "id": 34,
+    "categoryId": 184,
+    "label": "Dépenses matériaux",
+    "amount": -56.1,
+    "description": "L'opération peut avoir un très grande description (ou mémo) qui peut être modifié par le user",
+    "date": "2024-03-25"
+  },
+  {
+    "id": 35,
+    "categoryId": 186,
+    "label": "Prestataire partenaire",
+    "amount": 0,
+    "description": "",
+    "date": "2024-03-20"
+  },
+  {
+    "id": 36,
+    "categoryId": 221,
+    "label": "Achat matériaux secondaires",
+    "amount": -12.8,
+    "description": "",
+    "date": "2024-03-15"
+  },
+  {
+    "id": 37,
+    "categoryId": 2,
+    "label": "Recette Mars 2024",
+    "amount": 85,
+    "description": "",
+    "date": "2024-03-15"
+  },
+  {
+    "id": 38,
+    "categoryId": 7,
+    "label": "Papetterie",
+    "amount": -26,
+    "description": "Une simple petite description",
+    "date": "2024-02-04"
+  },
+  {
+    "id": 39,
+    "categoryId": 10,
+    "label": "Frais Véhicule",
+    "amount": -87,
+    "description": "",
+    "date": "2024-02-04"
+  },
+  {
+    "id": 40,
+    "categoryId": 11,
+    "label": "Maintenance généraliste",
+    "amount": -65,
+    "description": "",
+    "date": "2024-01-15"
+  },
+  {
+    "id": 41,
+    "categoryId": 12,
+    "label": "Masse salariale - Intérim",
+    "amount": -72.34,
+    "description": "",
+    "date": "2024-01-15"
+  },
+  {
+    "id": 42,
+    "categoryId": 13,
+    "label": "Materiel Divers",
+    "amount": -90.12,
+    "description": "",
+    "date": "2024-01-15"
+  },
+  {
+    "id": 43,
+    "categoryId": 91,
+    "label": "Vente produit Janvier",
+    "amount": 122.2,
+    "description": "",
+    "date": "2024-01-03"
+  },
+  {
+    "id": 44,
+    "categoryId": 92,
+    "label": "Vente fournitures diverses",
+    "amount": 738.9,
+    "description": "L'opération peut avoir un très grande description (ou mémo) qui peut être modifié par le user",
+    "date": "2024-01-01"
+  },
+  {
+    "id": 45,
+    "categoryId": 93,
+    "label": "Vente alcool",
+    "amount": 45.7,
+    "description": "",
+    "date": "2024-01-01"
+  },
+  {
+    "id": 46,
+    "categoryId": 184,
+    "label": "Dépenses matériaux",
+    "amount": -248,
+    "description": "",
+    "date": "2023-12-30"
+  },
+  {
+    "id": 47,
+    "categoryId": 186,
+    "label": "Prestataire partenaire",
+    "amount": -734,
+    "description": "L'opération peut avoir un très grande description (ou mémo) qui peut être modifié par le user",
+    "date": "2023-12-15"
+  },
+  {
+    "id": 48,
+    "categoryId": 221,
+    "label": "Achat matériaux secondaires",
+    "amount": 0,
+    "description": "",
+    "date": "2023-12-15"
+  }
+]

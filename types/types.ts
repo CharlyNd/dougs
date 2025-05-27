@@ -11,6 +11,10 @@ export type Category = {
   description: string;
 };
 
+export type EnrichedCategory = Category & {
+  group?: CategoriesGroup;
+};
+
 export type Operation = {
   id: number;
   categoryId?: Category["id"];
@@ -18,6 +22,7 @@ export type Operation = {
   label: string;
   description: string;
   date: string;
+  category?: EnrichedCategory;
 };
 
 export type Stats = {

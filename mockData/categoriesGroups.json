@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "label": "Recettes de votre activité",
+    "color": "green"
+  },
+  {
+    "id": 2,
+    "label": "Frais de fonctionnement",
+    "color": "purple"
+  },
+  {
+    "id": 3,
+    "label": "Achats & Sous-traitance",
+    "color": "blue"
+  }
+]

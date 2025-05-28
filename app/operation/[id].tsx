@@ -8,6 +8,7 @@ import { Input } from '~/components/Input';
 import Colors from '~/constants/Colors';
 import { PrimaryButton } from '~/components/PrimaryButton';
 import { SecondaryButton } from '~/components/SecondaryButton';
+import { Toast } from '~/components/Toast';
 
 export default function OperationDetailScreen() {
     const { id } = useLocalSearchParams();
@@ -25,6 +26,7 @@ export default function OperationDetailScreen() {
 
     const [amount, setAmount] = useState(operation ? String(operation.amount) : '');
     const [description, setDescription] = useState(operation ? operation.description : '');
+    const [toastVisible, setToastVisible] = useState(false);
 
     if (!operation) return <Text className="m-6">Opération introuvable</Text>;
 
@@ -82,6 +84,12 @@ export default function OperationDetailScreen() {
                     onPress={() => { console.log("enregistrer") }}
                 />
             </View>
+            <Toast
+                message="Modification enregistrée"
+                visible={toastVisible}
+                onClose={() => setToastVisible(false)}
+                color={Colors.green.textTag}
+            />
         </ScrollView>
     );
 }

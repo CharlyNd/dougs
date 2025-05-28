@@ -1,16 +1,23 @@
-
 import { useState, useEffect, useCallback } from 'react';
 import { Alert } from 'react-native';
 import type { Operation, Category, CategoriesGroup } from '~/types/types';
+import { useOperationStore } from '~/store/store';
 
 const PAGE_SIZE = 10;
 
 export function usePaginatedOperations(search: string) {
-    const [operations, setOperations] = useState<Operation[]>([]);
+    const {
+        operations,
+        setOperations,
+        appendOperations,
+        hasMore,
+        setHasMore,
+        offset,
+        setOffset,
+    } = useOperationStore();
+
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
-    const [offset, setOffset] = useState(0);
-    const [hasMore, setHasMore] = useState(true);
 
     const fetchOperations = useCallback(
         async (reset = false) => {
@@ -21,7 +28,11 @@ export function usePaginatedOperations(search: string) {
                     `http://localhost:3000/operations?offset=${currentOffset}&limit=${PAGE_SIZE}${search ? `&search=${encodeURIComponent(search)}` : ''}`
                 );
                 const data = await res.json();
-                setOperations(prev => (reset ? data : [...prev, ...data]));
+                if (reset) {
+                    setOperations(data);
+                } else {
+                    appendOperations(data);
+                }
                 setHasMore(data.length === PAGE_SIZE);
                 setOffset(currentOffset + PAGE_SIZE);
             } catch (error) {
@@ -32,7 +43,7 @@ export function usePaginatedOperations(search: string) {
                 setRefreshing(false);
             }
         },
-        [offset, search]
+        [offset, search, setOperations, appendOperations, setHasMore, setOffset]
     );
 
     useEffect(() => {
@@ -52,7 +63,8 @@ export function usePaginatedOperations(search: string) {
 }
 
 export function useCategories() {
-    const [categories, setCategories] = useState<Category[]>([]);
+    const { categories, setCategories } = useOperationStore();
+
     useEffect(() => {
         fetch('http://localhost:3000/categories')
             .then(res => res.json())
@@ -61,12 +73,14 @@ export function useCategories() {
                 Alert.alert('Une erreur est survenue lors de la récupération des catégories:', error.message);
                 setCategories([]);
             });
-    }, []);
+    }, [setCategories]);
+
     return categories;
 }
 
 export function useCategoryGroups() {
-    const [groups, setGroups] = useState<CategoriesGroup[]>([]);
+    const { groups, setGroups } = useOperationStore();
+
     useEffect(() => {
         fetch('http://localhost:3000/categories-groups')
             .then(res => res.json())
@@ -75,6 +89,7 @@ export function useCategoryGroups() {
                 Alert.alert('Une erreur est survenue lors de la récupération des groupes de catégories:', error.message);
                 setGroups([]);
             });
-    }, []);
+    }, [setGroups]);
+
     return groups;
 }

@@ -1,19 +1,19 @@
 import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import { View, Text, ScrollView } from 'react-native';
-import operations from '~/mockData/operations.json';
-import categories from '~/mockData/categories.json';
-import categoryGroups from '~/mockData/categoriesGroups.json';
 import { useState, useEffect } from 'react';
 import { Input } from '~/components/ui/Input';
 import Colors from '~/constants/Colors';
 import { PrimaryButton } from '~/components/ui/PrimaryButton';
 import { SecondaryButton } from '~/components/ui/SecondaryButton';
 import { Toast } from '~/components/ui/Toast';
+import { useOperationStore } from '~/store/store';
 
 export default function OperationDetailScreen() {
     const { id } = useLocalSearchParams();
     const navigation = useNavigation();
     const router = useRouter();
+    const { operations, categories } = useOperationStore();
+
     const operation = operations.find(op => String(op.id) === String(id));
 
     useEffect(() => {
@@ -31,7 +31,6 @@ export default function OperationDetailScreen() {
     if (!operation) return <Text className="m-6">Opération introuvable</Text>;
 
     const category = categories.find(cat => String(cat.id) === String(operation.categoryId));
-    const group = category ? categoryGroups.find(g => String(g.id) === String((category as any).groupId)) : undefined;
 
     return (
         <ScrollView className="flex-1 bg-white px-4" contentContainerStyle={{ flexGrow: 1, paddingBottom: 20 }}>
@@ -64,9 +63,7 @@ export default function OperationDetailScreen() {
             </View>
             <View className="pt-8">
                 <SecondaryButton
-                    title={category && typeof (category as any).name === 'string'
-                        ? (category as any).name
-                        : 'Sélectionner une catégorie'}
+                    title={category?.label || 'Sélectionner une catégorie'}
                     onPress={() => {
                         router.push({
                             pathname: '/operation/categoryScreen',

@@ -1,15 +1,30 @@
 import { create } from 'zustand';
+import type { Operation, Category, CategoriesGroup } from '~/types/types';
 
-export interface BearState {
-  bears: number;
-  increasePopulation: () => void;
-  removeAllBears: () => void;
-  updateBears: (newBears: number) => void;
+interface OperationStore {
+  operations: Operation[];
+  setOperations: (ops: Operation[]) => void;
+  appendOperations: (ops: Operation[]) => void;
+  categories: Category[];
+  setCategories: (cats: Category[]) => void;
+  groups: CategoriesGroup[];
+  setGroups: (groups: CategoriesGroup[]) => void;
+  hasMore: boolean;
+  setHasMore: (hasMore: boolean) => void;
+  offset: number;
+  setOffset: (offset: number) => void;
 }
 
-export const useStore = create<BearState>((set) => ({
-  bears: 0,
-  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  removeAllBears: () => set({ bears: 0 }),
-  updateBears: (newBears) => set({ bears: newBears }),
+export const useOperationStore = create<OperationStore>((set) => ({
+  operations: [],
+  setOperations: (ops) => set({ operations: ops }),
+  appendOperations: (ops) => set((state) => ({ operations: [...state.operations, ...ops] })),
+  categories: [],
+  setCategories: (cats) => set({ categories: cats }),
+  groups: [],
+  setGroups: (groups) => set({ groups }),
+  hasMore: true,
+  setHasMore: (hasMore) => set({ hasMore }),
+  offset: 0,
+  setOffset: (offset) => set({ offset }),
 }));

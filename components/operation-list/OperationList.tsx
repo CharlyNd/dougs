@@ -5,6 +5,7 @@ import { useState, useMemo } from 'react';
 import { OperationListContent } from './OperationListContent';
 import type { Operation } from '../../types/types';
 import { usePaginatedOperations, useCategories, useCategoryGroups } from '~/hooks/api';
+import { useOperationStore } from '~/store/store';
 
 interface GroupedOperations {
   date: string;
@@ -14,18 +15,21 @@ interface GroupedOperations {
 export function OperationList() {
   const [search, setSearch] = useState('');
   const { operations, loading, refreshing, onRefresh, onEndReached } = usePaginatedOperations(search);
-  const categories = useCategories();
-  const categoryGroups = useCategoryGroups();
+  const { categories, groups } = useOperationStore();
+
+  // Charger les données au démarrage
+  useCategories();
+  useCategoryGroups();
 
   // Enrich operations with category and group information
   const enrichedOperations = useMemo(() => operations.map(operation => {
     const category = categories.find(cat => cat.id === operation.categoryId);
-    const group = category ? categoryGroups.find(group => group.id === category.groupId) : undefined;
+    const group = category ? groups.find(group => group.id === category.groupId) : undefined;
     return {
       ...operation,
       category: category ? { ...category, group } : undefined
     };
-  }), [operations, categories, categoryGroups]);
+  }), [operations, categories, groups]);
 
   // Group operations by date
   const groupedByDate = useMemo(() => {
@@ -53,7 +57,7 @@ export function OperationList() {
   if (loading && !refreshing && operations.length === 0) return <Text className="m-6">Chargement...</Text>;
 
   return (
-    <View className='bg-white flex-1'>
+    <View className="flex-1">
       <OperationSearch value={search} onChange={setSearch} />
       <OperationSummary
         credit={totals.credit}

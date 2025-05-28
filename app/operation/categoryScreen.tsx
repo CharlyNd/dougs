@@ -4,7 +4,7 @@ import categoryGroups from '~/mockData/categoriesGroups.json';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { OperationItem } from '~/components/operation-list/OperationItem';
-import { HeaderFilter } from '~/components/HeaderFilter';
+import { HeaderFilter } from '~/components/operation-list/HeaderFilter';
 import { OperationListHeader } from '~/components/operation-list/OperationListHeader';
 
 export default function SelectCategoryScreen() {

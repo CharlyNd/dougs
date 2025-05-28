@@ -1,7 +1,7 @@
 import { View, Text, Pressable } from 'react-native';
 import type { Operation } from '../../types/types';
 import Colors from '~/constants/Colors';
-import { Tag } from '../Tag';
+import { Tag } from '../ui/Tag';
 
 interface OperationItemProps {
   operation: Operation;

@@ -4,11 +4,11 @@ import operations from '~/mockData/operations.json';
 import categories from '~/mockData/categories.json';
 import categoryGroups from '~/mockData/categoriesGroups.json';
 import { useState, useEffect } from 'react';
-import { Input } from '~/components/Input';
+import { Input } from '~/components/ui/Input';
 import Colors from '~/constants/Colors';
-import { PrimaryButton } from '~/components/PrimaryButton';
-import { SecondaryButton } from '~/components/SecondaryButton';
-import { Toast } from '~/components/Toast';
+import { PrimaryButton } from '~/components/ui/PrimaryButton';
+import { SecondaryButton } from '~/components/ui/SecondaryButton';
+import { Toast } from '~/components/ui/Toast';
 
 export default function OperationDetailScreen() {
     const { id } = useLocalSearchParams();

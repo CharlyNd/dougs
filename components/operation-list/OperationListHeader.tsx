@@ -33,7 +33,7 @@ export function OperationListHeader({
 
   return (
     <View className="flex-row justify-between items-center px-4 py-2" style={{ backgroundColor: bg }}>
-      <Text className="font-semibold" style={{ color: textColor ? resolveGroupColors(textColor).text : text }}>
+      <Text style={{ color: textColor ? resolveGroupColors(textColor).text : text }}>
         {label}
       </Text>
       {rightLabel && (

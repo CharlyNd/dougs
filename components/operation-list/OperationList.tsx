@@ -1,12 +1,10 @@
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { OperationSummary } from './OperationSummary';
-import operations from '~/mockData/operations.json';
-import categories from '~/mockData/categories.json';
-import categoryGroups from '~/mockData/categoriesGroups.json';
 import { OperationSearch } from './OperationSearch';
-import { useState } from 'react';
-import type { Operation } from '../../types/types';
+import { useState, useMemo } from 'react';
 import { OperationListContent } from './OperationListContent';
+import type { Operation } from '../../types/types';
+import { usePaginatedOperations, useCategories, useCategoryGroups } from '~/hooks/api';
 
 interface GroupedOperations {
   date: string;
@@ -15,28 +13,32 @@ interface GroupedOperations {
 
 export function OperationList() {
   const [search, setSearch] = useState('');
+  const { operations, loading, refreshing, onRefresh, onEndReached } = usePaginatedOperations(search);
+  const categories = useCategories();
+  const categoryGroups = useCategoryGroups();
 
   // Enrich operations with category and group information
-  const enrichedOperations = operations.map(operation => {
+  const enrichedOperations = useMemo(() => operations.map(operation => {
     const category = categories.find(cat => cat.id === operation.categoryId);
     const group = category ? categoryGroups.find(group => group.id === category.groupId) : undefined;
-
     return {
       ...operation,
       category: category ? { ...category, group } : undefined
     };
-  });
+  }), [operations, categories, categoryGroups]);
 
   // Group operations by date
-  const groupedByDate = enrichedOperations.reduce<Record<string, Operation[]>>((acc, operation) => {
-    const date = operation.date;
-    acc[date] = [...(acc[date] || []), operation];
-    return acc;
-  }, {});
+  const groupedByDate = useMemo(() => {
+    return enrichedOperations.reduce<Record<string, Operation[]>>((acc, operation) => {
+      const date = operation.date;
+      acc[date] = [...(acc[date] || []), operation];
+      return acc;
+    }, {});
+  }, [enrichedOperations]);
 
-  const listItems: GroupedOperations[] = Object.entries(groupedByDate)
+  const listItems: GroupedOperations[] = useMemo(() => Object.entries(groupedByDate)
     .map(([date, operations]) => ({ date, operations }))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()), [groupedByDate]);
 
   // Calculate totals using array methods
   const creditOperations = enrichedOperations.filter(op => op.amount > 0);
@@ -48,6 +50,8 @@ export function OperationList() {
     balance: enrichedOperations.reduce((sum, op) => sum + op.amount, 0)
   };
 
+  if (loading && !refreshing && operations.length === 0) return <Text className="m-6">Chargement...</Text>;
+
   return (
     <View className='bg-white flex-1'>
       <OperationSearch value={search} onChange={setSearch} />
@@ -56,7 +60,12 @@ export function OperationList() {
         debit={totals.debit}
         balance={totals.balance}
       />
-      <OperationListContent listItems={listItems} />
+      <OperationListContent
+        listItems={listItems}
+        onRefresh={onRefresh}
+        refreshing={refreshing}
+        onEndReached={onEndReached}
+      />
     </View>
   );
 }

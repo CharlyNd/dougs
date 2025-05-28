@@ -12,9 +12,12 @@ interface GroupedOperations {
 
 interface OperationListContentProps {
   listItems: GroupedOperations[];
+  onRefresh?: () => void;
+  refreshing?: boolean;
+  onEndReached?: () => void;
 }
 
-export function OperationListContent({ listItems }: OperationListContentProps) {
+export function OperationListContent({ listItems, onRefresh, refreshing, onEndReached }: OperationListContentProps) {
   return (
     <FlatList
       data={listItems}
@@ -47,6 +50,10 @@ export function OperationListContent({ listItems }: OperationListContentProps) {
           ))}
         </View>
       )}
+      onRefresh={onRefresh}
+      refreshing={!!refreshing}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0.5}
     />
   );
 } 

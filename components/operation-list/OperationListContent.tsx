@@ -1,8 +1,9 @@
-import { View, Text, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { OperationItem } from './OperationItem';
 import Colors from '../../constants/Colors';
 import type { Operation } from '../../types/types';
 import { router } from 'expo-router';
+import { OperationListHeader } from './OperationListHeader';
 
 interface GroupedOperations {
   date: string;
@@ -20,18 +21,17 @@ export function OperationListContent({ listItems }: OperationListContentProps) {
       keyExtractor={(item) => item.date}
       renderItem={({ item }) => (
         <View>
-          <View className="flex-row justify-between items-center px-4 py-1" style={{ backgroundColor: Colors.gray.bg }}>
-            <Text className='text-base' style={{ color: Colors.labelOperation.date }}>
-              {new Date(item.date).toLocaleDateString('fr-FR', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-              })}
-            </Text>
-            <Text className="text-md" style={{ color: Colors.labelOperation.numberOperation }}>
-              {item.operations.length} {item.operations.length === 1 ? 'opération' : 'opérations'}
-            </Text>
-          </View>
+          <OperationListHeader
+            label={new Date(item.date).toLocaleDateString('fr-FR', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric'
+            })}
+            bgColor={Colors.gray.bg}
+            textColor={Colors.labelOperation.date}
+            rightLabel={`${item.operations.length} ${item.operations.length === 1 ? 'opération' : 'opérations'}`}
+            rightLabelColor={Colors.labelOperation.numberOperation}
+          />
           {item.operations.map((operation, index) => (
             <View key={operation.id}>
               <OperationItem

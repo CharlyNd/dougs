@@ -1,4 +1,4 @@
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import { View, Text, ScrollView } from 'react-native';
 import operations from '~/mockData/operations.json';
 import categories from '~/mockData/categories.json';
@@ -12,6 +12,7 @@ import { SecondaryButton } from '~/components/SecondaryButton';
 export default function OperationDetailScreen() {
     const { id } = useLocalSearchParams();
     const navigation = useNavigation();
+    const router = useRouter();
     const operation = operations.find(op => String(op.id) === String(id));
 
     useEffect(() => {
@@ -64,7 +65,12 @@ export default function OperationDetailScreen() {
                     title={category && typeof (category as any).name === 'string'
                         ? (category as any).name
                         : 'Sélectionner une catégorie'}
-                    onPress={() => { console.log("selectionner une catégorie") }}
+                    onPress={() => {
+                        router.push({
+                            pathname: '/operation/categoryScreen',
+                            params: { id: String(operation.id) }
+                        });
+                    }}
                     className="mb-6"
                 />
             </View>

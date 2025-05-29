@@ -7,7 +7,7 @@ const API_URL = 'http://localhost:3000';
 const PAGE_SIZE = 10;
 
 // Fonction utilitaire pour gérer les appels API
-async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T | null> {
+export async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T | null> {
     try {
         const response = await fetch(`${API_URL}${endpoint}`, {
             headers: { 'Content-Type': 'application/json' },
@@ -140,18 +140,20 @@ export const updateOperation = async (
 export function useLoadCategoriesAndGroups() {
     const { setCategories, setGroups } = useOperationStore();
 
-    useEffect(() => {
-        const loadData = async () => {
-            const [categoriesData, groupsData] = await Promise.all([
-                fetchApi<Category[]>('/categories'),
-                fetchApi<CategoriesGroup[]>('/categories-groups')
-            ]);
-            if (categoriesData) setCategories(categoriesData);
-            if (groupsData) setGroups(groupsData);
-        };
-
-        loadData();
+    const loadData = useCallback(async () => {
+        const [categoriesData, groupsData] = await Promise.all([
+            fetchApi<Category[]>('/categories'),
+            fetchApi<CategoriesGroup[]>('/categories-groups')
+        ]);
+        if (categoriesData) setCategories(categoriesData);
+        if (groupsData) setGroups(groupsData);
     }, [setCategories, setGroups]);
+
+    useEffect(() => {
+        loadData();
+    }, [loadData]);
+
+    return loadData;
 }
 
 export function useOperationStats() {

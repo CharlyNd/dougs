@@ -1,9 +1,9 @@
 import { View, FlatList } from 'react-native';
-import { OperationItem } from './OperationItem';
-import Colors from '../../constants/Colors';
-import type { Operation } from '../../types/types';
+import { OperationItem } from '../Item';
+import Colors from '~/constants/Colors';
+import type { Operation } from '~/types/types';
 import { router } from 'expo-router';
-import { OperationListHeader } from './OperationListHeader';
+import { OperationListHeader } from '../ListHeader';
 
 interface GroupedOperations {
   date: string;

@@ -1,9 +1,9 @@
 import { View, ScrollView } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { OperationItem } from '~/components/operation-list/OperationItem';
-import { HeaderFilter } from '~/components/operation-list/HeaderFilter';
-import { OperationListHeader } from '~/components/operation-list/OperationListHeader';
+import { OperationItem } from '~/components/Item';
+import { HeaderFilter } from '~/components/HeaderFilter';
+import { OperationListHeader } from '~/components/ListHeader';
 import { useOperationStore } from '~/store/store';
 
 export default function SelectCategoryScreen() {

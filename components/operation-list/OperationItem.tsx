@@ -18,7 +18,7 @@ export function OperationItem({ operation, onPress, mode = 'operation' }: Operat
   return (
     <Pressable
       onPress={onPress}
-      className="px-4 py-3 bg-white"
+      className="px-6 py-3 bg-white"
       accessibilityRole="button"
       accessibilityLabel={`Voir le détail de l'opération ${operation.label}`}
     >

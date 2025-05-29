@@ -20,8 +20,8 @@ export function HeaderFilter<T = string>({
   className = '',
 }: HeaderFilterProps<T>) {
   return (
-    <View className={`flex-row items-center px-4 my-4 ${className}`}>
-      <Text className="mr-6 text-lg">Trier par</Text>
+    <View className={`flex-row items-center px-6 my-4 ${className}`}>
+      <Text className="mr-6 text-xl">Trier par</Text>
       {options.map(option => (
         <Pressable
           key={String(option.value)}

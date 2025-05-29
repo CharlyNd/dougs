@@ -32,7 +32,7 @@ export function OperationListHeader({
   const { bg, text } = resolveGroupColors(bgColor);
 
   return (
-    <View className="flex-row justify-between items-center px-4 py-2" style={{ backgroundColor: bg }}>
+    <View className="flex-row justify-between items-center px-6 py-2" style={{ backgroundColor: bg }}>
       <Text style={{ color: textColor ? resolveGroupColors(textColor).text : text }}>
         {label}
       </Text>

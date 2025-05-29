@@ -29,6 +29,16 @@ export default function OperationDetailScreen() {
     const [description, setDescription] = useState(operation ? operation.description : '');
     const [toastVisible, setToastVisible] = useState(false);
 
+    // Masquer le toast après un délai
+    useEffect(() => {
+        if (toastVisible) {
+            const timer = setTimeout(() => {
+                setToastVisible(false);
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [toastVisible]);
+
     if (!operation) return <Text className="m-6">Opération introuvable</Text>;
 
     // Trouver la catégorie sélectionnée (nouvelle ou existante)

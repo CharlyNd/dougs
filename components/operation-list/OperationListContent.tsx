@@ -1,5 +1,5 @@
 import { View, FlatList } from 'react-native';
-import { OperationItem } from '../Item';
+import { Item } from '../Item';
 import Colors from '~/constants/Colors';
 import type { Operation } from '~/types/types';
 import { router } from 'expo-router';
@@ -43,7 +43,7 @@ export function OperationListContent({ listItems, onRefresh, refreshing, onEndRe
           />
           {item.operations.map((operation, index) => (
             <View key={operation.id}>
-              <OperationItem
+              <Item
                 operation={operation}
                 onPress={() => {
                   router.push(`/operation/${operation.id}`);

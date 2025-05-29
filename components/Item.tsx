@@ -3,13 +3,13 @@ import type { Operation } from '../types/types';
 import Colors from '~/constants/Colors';
 import { Tag } from './ui/Tag';
 
-interface OperationItemProps {
+interface ItemProps {
   operation: Operation;
   onPress?: () => void;
   mode?: 'operation' | 'category';
 }
 
-export function OperationItem({ operation, onPress, mode = 'operation' }: OperationItemProps) {
+export function Item({ operation, onPress, mode = 'operation' }: ItemProps) {
 
   const isCredit = operation.amount > 0;
   const category = operation.category;

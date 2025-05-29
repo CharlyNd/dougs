@@ -1,7 +1,7 @@
 import { View, ScrollView } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { OperationItem } from '~/components/Item';
+import { Item } from '~/components/Item';
 import { HeaderFilter } from '~/components/HeaderFilter';
 import { OperationListHeader } from '~/components/ListHeader';
 import { useOperationStore } from '~/store/store';
@@ -60,7 +60,7 @@ export default function SelectCategoryScreen() {
           />
           {group.categories.map((cat, idx) => (
             <View key={`${group.id}-${cat.id}`}>
-              <OperationItem
+              <Item
                 operation={{
                   id: cat.id,
                   label: cat.label,

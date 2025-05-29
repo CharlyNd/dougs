@@ -5,6 +5,7 @@ import type { Operation } from '~/types/types';
 import { router } from 'expo-router';
 import { OperationListHeader } from '../ListHeader';
 import { Loading } from '../ui/Loading';
+import { useOperationStore } from '~/store/store';
 
 interface GroupedOperations {
   date: string;
@@ -20,6 +21,8 @@ interface OperationListContentProps {
 }
 
 export function OperationListContent({ listItems, onRefresh, refreshing, onEndReached, loading }: OperationListContentProps) {
+  const { setSelectedCategoryId } = useOperationStore();
+
   if (loading && !refreshing && listItems.length === 0) {
     return <Loading />;
   }
@@ -46,6 +49,7 @@ export function OperationListContent({ listItems, onRefresh, refreshing, onEndRe
               <Item
                 operation={operation}
                 onPress={() => {
+                  setSelectedCategoryId(operation.categoryId ? String(operation.categoryId) : null);
                   router.push(`/operation/${operation.id}`);
                 }}
               />

@@ -16,6 +16,10 @@ interface OperationStore {
   setOffset: (offset: number) => void;
   stats: Stats | null;
   setStats: (stats: Stats | null) => void;
+  toastVisible: boolean;
+  setToastVisible: (visible: boolean) => void;
+  selectedCategoryId: string | null;
+  setSelectedCategoryId: (categoryId: string | null) => void;
 }
 
 export const useOperationStore = create<OperationStore>((set) => ({
@@ -37,4 +41,8 @@ export const useOperationStore = create<OperationStore>((set) => ({
   setOffset: (offset) => set({ offset }),
   stats: null,
   setStats: (stats) => set({ stats }),
+  toastVisible: false,
+  setToastVisible: (visible) => set({ toastVisible: visible }),
+  selectedCategoryId: null,
+  setSelectedCategoryId: (categoryId) => set({ selectedCategoryId: categoryId }),
 }));

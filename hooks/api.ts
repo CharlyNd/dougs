@@ -121,15 +121,21 @@ export const updateOperation = async (
     });
 
     if (updatedOperation) {
-        useOperationStore.getState().updateOperation(id, updatedOperation);
+        const store = useOperationStore.getState();
+        store.updateOperation(id, updatedOperation);
+        store.setToastVisible(true);
+        setTimeout(() => {
+            store.setToastVisible(false);
+        }, 3000);
+
+        // Si on met à jour la catégorie, on réinitialise selectedCategoryId
+        if (updates.categoryId) {
+            store.setSelectedCategoryId(null);
+        }
     }
 
     return updatedOperation;
 };
-
-// Alias pour la mise à jour de catégorie
-export const updateOperationCategory = (operationId: string, categoryId: string) =>
-    updateOperation(operationId, { categoryId: Number(categoryId) });
 
 export function useLoadCategoriesAndGroups() {
     const { setCategories, setGroups } = useOperationStore();

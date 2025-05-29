@@ -10,7 +10,7 @@ export default function SelectCategoryScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams();
   const [sort, setSort] = useState<'group' | 'az' | 'za'>('group');
-  const { categories, groups } = useOperationStore();
+  const { categories, groups, setSelectedCategoryId } = useOperationStore();
 
   // Group categories by groupId
   const grouped = groups.map(group => ({
@@ -31,11 +31,8 @@ export default function SelectCategoryScreen() {
 
   const handleCategorySelect = (categoryId: string) => {
     if (!id) return;
-    router.replace('/');
-    router.push({
-      pathname: '/operation/[id]',
-      params: { id: String(id), categoryId }
-    });
+    setSelectedCategoryId(categoryId);
+    router.back();
   };
 
   return (
@@ -58,11 +55,11 @@ export default function SelectCategoryScreen() {
             bgColor={group.color}
             textColor={group.color}
           />
-          {group.categories.map((cat, idx) => (
+          {group.categories.map((cat) => (
             <View key={`${group.id}-${cat.id}`}>
               <Item
                 operation={{
-                  id: cat.id,
+                  id: Number(`${group.id}${cat.id}`),
                   label: cat.label,
                   description: cat.description,
                   amount: 0,
@@ -71,7 +68,7 @@ export default function SelectCategoryScreen() {
                 mode="category"
                 onPress={() => handleCategorySelect(String(cat.id))}
               />
-              {idx < group.categories.length - 1 && (
+              {cat !== group.categories[group.categories.length - 1] && (
                 <View className="h-[1px] bg-gray-200 mx-4" />
               )}
             </View>

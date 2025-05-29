@@ -7,13 +7,20 @@ import { PrimaryButton } from '~/components/ui/PrimaryButton';
 import { SecondaryButton } from '~/components/ui/SecondaryButton';
 import { Toast } from '~/components/ui/Toast';
 import { useOperationStore } from '~/store/store';
-import { updateOperationCategory } from '~/hooks/api';
+import { updateOperation } from '~/hooks/api';
 
 export default function OperationDetailScreen() {
-    const { id, categoryId } = useLocalSearchParams();
+    const { id } = useLocalSearchParams();
     const navigation = useNavigation();
     const router = useRouter();
-    const { operations, categories, groups } = useOperationStore();
+    const {
+        operations,
+        categories,
+        groups,
+        toastVisible,
+        setToastVisible,
+        selectedCategoryId,
+    } = useOperationStore();
 
     const operation = operations.find(op => String(op.id) === String(id));
 
@@ -27,23 +34,12 @@ export default function OperationDetailScreen() {
 
     const [amount, setAmount] = useState(operation ? String(operation.amount) : '');
     const [description, setDescription] = useState(operation ? operation.description : '');
-    const [toastVisible, setToastVisible] = useState(false);
-
-    // Masquer le toast après un délai
-    useEffect(() => {
-        if (toastVisible) {
-            const timer = setTimeout(() => {
-                setToastVisible(false);
-            }, 3000);
-            return () => clearTimeout(timer);
-        }
-    }, [toastVisible]);
 
     if (!operation) return <Text className="m-6">Opération introuvable</Text>;
 
     // Trouver la catégorie sélectionnée (nouvelle ou existante)
-    const selectedCategory = categoryId
-        ? categories.find(cat => String(cat.id) === String(categoryId))
+    const selectedCategory = selectedCategoryId
+        ? categories.find(cat => String(cat.id) === String(selectedCategoryId))
         : categories.find(cat => String(cat.id) === String(operation.categoryId));
 
     // Trouver le groupe de la catégorie sélectionnée
@@ -52,11 +48,20 @@ export default function OperationDetailScreen() {
         : undefined;
 
     const handleSave = async () => {
-        if (categoryId) {
-            const success = await updateOperationCategory(String(id), String(categoryId));
-            if (success) {
-                setToastVisible(true);
-            }
+        const newAmount = parseFloat(amount) || 0;
+        const hasChanges = 
+            selectedCategoryId || 
+            newAmount !== operation.amount || 
+            description !== operation.description;
+
+        if (hasChanges) {
+            const updates = {
+                ...(selectedCategoryId && { categoryId: Number(selectedCategoryId) }),
+                ...(newAmount !== operation.amount && { amount: newAmount }),
+                ...(description !== operation.description && { description })
+            };
+
+            await updateOperation(String(id), updates);
         }
     };
 

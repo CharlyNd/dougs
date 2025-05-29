@@ -59,7 +59,7 @@ export default function SelectCategoryScreen() {
             textColor={group.color}
           />
           {group.categories.map((cat, idx) => (
-            <View key={cat.id}>
+            <View key={`${group.id}-${cat.id}`}>
               <OperationItem
                 operation={{
                   id: cat.id,

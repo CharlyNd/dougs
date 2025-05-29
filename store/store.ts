@@ -5,6 +5,7 @@ interface OperationStore {
   operations: Operation[];
   setOperations: (ops: Operation[]) => void;
   appendOperations: (ops: Operation[]) => void;
+  updateOperation: (id: string, updates: Partial<Operation>) => void;
   categories: Category[];
   setCategories: (cats: Category[]) => void;
   groups: CategoriesGroup[];
@@ -19,6 +20,11 @@ export const useOperationStore = create<OperationStore>((set) => ({
   operations: [],
   setOperations: (ops) => set({ operations: ops }),
   appendOperations: (ops) => set((state) => ({ operations: [...state.operations, ...ops] })),
+  updateOperation: (id, updates) => set(state => ({
+    operations: state.operations.map(op => 
+      Number(op.id) === Number(id) ? { ...op, ...updates } : op
+    )
+  })),
   categories: [],
   setCategories: (cats) => set({ categories: cats }),
   groups: [],

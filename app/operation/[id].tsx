@@ -7,9 +7,10 @@ import { PrimaryButton } from '~/components/ui/PrimaryButton';
 import { SecondaryButton } from '~/components/ui/SecondaryButton';
 import { Toast } from '~/components/ui/Toast';
 import { useOperationStore } from '~/store/store';
+import { updateOperationCategory } from '~/hooks/api';
 
 export default function OperationDetailScreen() {
-    const { id } = useLocalSearchParams();
+    const { id, categoryId } = useLocalSearchParams();
     const navigation = useNavigation();
     const router = useRouter();
     const { operations, categories } = useOperationStore();
@@ -30,7 +31,19 @@ export default function OperationDetailScreen() {
 
     if (!operation) return <Text className="m-6">Opération introuvable</Text>;
 
-    const category = categories.find(cat => String(cat.id) === String(operation.categoryId));
+    // Trouver la catégorie sélectionnée (nouvelle ou existante)
+    const selectedCategory = categoryId
+        ? categories.find(cat => String(cat.id) === String(categoryId))
+        : categories.find(cat => String(cat.id) === String(operation.categoryId));
+
+    const handleSave = async () => {
+        if (categoryId) {
+            const success = await updateOperationCategory(String(id), String(categoryId));
+            if (success) {
+                setToastVisible(true);
+            }
+        }
+    };
 
     return (
         <ScrollView className="flex-1 bg-white px-4" contentContainerStyle={{ flexGrow: 1, paddingBottom: 20 }}>
@@ -63,7 +76,7 @@ export default function OperationDetailScreen() {
             </View>
             <View className="pt-8">
                 <SecondaryButton
-                    title={category?.label || 'Sélectionner une catégorie'}
+                    title={selectedCategory?.label || 'Sélectionner une catégorie'}
                     onPress={() => {
                         router.push({
                             pathname: '/operation/categoryScreen',
@@ -78,7 +91,7 @@ export default function OperationDetailScreen() {
             <View className="p-4">
                 <PrimaryButton
                     title="Enregistrer"
-                    onPress={() => { console.log("enregistrer") }}
+                    onPress={handleSave}
                 />
             </View>
             <Toast

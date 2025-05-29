@@ -1,11 +1,12 @@
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { OperationSummary } from './OperationSummary';
 import { OperationSearch } from './OperationSearch';
 import { useState, useMemo } from 'react';
 import { OperationListContent } from './OperationListContent';
 import type { Operation } from '../../types/types';
-import { usePaginatedOperations, useCategories, useCategoryGroups } from '~/hooks/api';
+import { usePaginatedOperations, useLoadCategoriesAndGroups } from '~/hooks/api';
 import { useOperationStore } from '~/store/store';
+import Colors from '~/constants/Colors';
 
 interface GroupedOperations {
   date: string;
@@ -17,9 +18,8 @@ export function OperationList() {
   const { operations, loading, refreshing, onRefresh, onEndReached } = usePaginatedOperations(search);
   const { categories, groups } = useOperationStore();
 
-  // Charger les données au démarrage
-  useCategories();
-  useCategoryGroups();
+  // Charger les données une seule fois au montage du composant
+  useLoadCategoriesAndGroups();
 
   // Enrich operations with category and group information
   const enrichedOperations = useMemo(() => operations.map(operation => {
@@ -54,7 +54,14 @@ export function OperationList() {
     balance: enrichedOperations.reduce((sum, op) => sum + op.amount, 0)
   };
 
-  if (loading && !refreshing && operations.length === 0) return <Text className="m-6">Chargement...</Text>;
+  if (loading && !refreshing && operations.length === 0) {
+    return (
+      <View className="flex-1 items-center justify-center">
+        <ActivityIndicator size="large" color={Colors.blue.text} />
+        <Text className="mt-4 text-gray-500">Chargement...</Text>
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1">

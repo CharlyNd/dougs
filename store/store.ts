@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Operation, Category, CategoriesGroup } from '~/types/types';
+import type { Operation, Category, CategoriesGroup, Stats } from '~/types/types';
 
 interface OperationStore {
   operations: Operation[];
@@ -14,6 +14,8 @@ interface OperationStore {
   setHasMore: (hasMore: boolean) => void;
   offset: number;
   setOffset: (offset: number) => void;
+  stats: Stats | null;
+  setStats: (stats: Stats | null) => void;
 }
 
 export const useOperationStore = create<OperationStore>((set) => ({
@@ -33,4 +35,6 @@ export const useOperationStore = create<OperationStore>((set) => ({
   setHasMore: (hasMore) => set({ hasMore }),
   offset: 0,
   setOffset: (offset) => set({ offset }),
+  stats: null,
+  setStats: (stats) => set({ stats }),
 }));

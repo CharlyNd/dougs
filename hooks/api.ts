@@ -147,3 +147,25 @@ export function useLoadCategoriesAndGroups() {
         loadData();
     }, [setCategories, setGroups]);
 }
+
+export function useOperationStats() {
+    const { stats, setStats } = useOperationStore();
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const data = await fetchApi<Stats>('/operations/stats');
+                if (data) setStats(data);
+            } catch (error) {
+                console.error('Error fetching operation stats:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchStats();
+    }, [setStats]);
+
+    return { stats, loading };
+}

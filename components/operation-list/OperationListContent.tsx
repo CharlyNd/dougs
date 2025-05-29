@@ -4,6 +4,7 @@ import Colors from '~/constants/Colors';
 import type { Operation } from '~/types/types';
 import { router } from 'expo-router';
 import { OperationListHeader } from '../ListHeader';
+import { Loading } from '../ui/Loading';
 
 interface GroupedOperations {
   date: string;
@@ -15,9 +16,14 @@ interface OperationListContentProps {
   onRefresh?: () => void;
   refreshing?: boolean;
   onEndReached?: () => void;
+  loading?: boolean;
 }
 
-export function OperationListContent({ listItems, onRefresh, refreshing, onEndReached }: OperationListContentProps) {
+export function OperationListContent({ listItems, onRefresh, refreshing, onEndReached, loading }: OperationListContentProps) {
+  if (loading && !refreshing && listItems.length === 0) {
+    return <Loading />;
+  }
+
   return (
     <FlatList
       data={listItems}

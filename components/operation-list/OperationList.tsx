@@ -1,12 +1,11 @@
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View } from 'react-native';
 import { OperationSummary } from './OperationSummary';
 import { OperationSearch } from './OperationSearch';
 import { useState, useMemo } from 'react';
 import { OperationListContent } from './OperationListContent';
 import type { Operation } from '../../types/types';
-import { usePaginatedOperations, useLoadCategoriesAndGroups } from '~/hooks/api';
+import { usePaginatedOperations, useLoadCategoriesAndGroups, useOperationStats } from '~/hooks/api';
 import { useOperationStore } from '~/store/store';
-import Colors from '~/constants/Colors';
 
 interface GroupedOperations {
   date: string;
@@ -17,6 +16,7 @@ export function OperationList() {
   const [search, setSearch] = useState('');
   const { operations, loading, refreshing, onRefresh, onEndReached } = usePaginatedOperations(search);
   const { categories, groups } = useOperationStore();
+  const { stats, loading: statsLoading } = useOperationStats();
 
   // Charger les données une seule fois au montage du composant
   useLoadCategoriesAndGroups();
@@ -44,37 +44,20 @@ export function OperationList() {
     .map(([date, operations]) => ({ date, operations }))
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()), [groupedByDate]);
 
-  // Calculate totals using array methods
-  const creditOperations = enrichedOperations.filter(op => op.amount > 0);
-  const debitOperations = enrichedOperations.filter(op => op.amount < 0);
-
-  const totals = {
-    credit: creditOperations.reduce((sum, op) => sum + op.amount, 0),
-    debit: debitOperations.reduce((sum, op) => sum + Math.abs(op.amount), 0),
-    balance: enrichedOperations.reduce((sum, op) => sum + op.amount, 0)
-  };
-
-  if (loading && !refreshing && operations.length === 0) {
-    return (
-      <View className="flex-1 items-center justify-center">
-        <ActivityIndicator size="large" color={Colors.blue.text} />
-        <Text className="mt-4 text-gray-500">Chargement...</Text>
-      </View>
-    );
-  }
-
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-white">
       <OperationSearch value={search} onChange={setSearch} />
       <OperationSummary
-        credit={totals.credit}
-        debit={totals.debit}
-        balance={totals.balance}
+        credit={stats?.incomesTotal || 0}
+        debit={stats?.outcomesTotal || 0}
+        balance={stats?.balanceTotal || 0}
+        loading={statsLoading}
       />
       <OperationListContent
         listItems={listItems}
-        onRefresh={onRefresh}
+        loading={loading}
         refreshing={refreshing}
+        onRefresh={onRefresh}
         onEndReached={onEndReached}
       />
     </View>

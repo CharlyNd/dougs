@@ -1,13 +1,23 @@
 import { View, Text } from 'react-native';
 import Colors from '~/constants/Colors';
+import { Loading } from '../ui/Loading';
 
 interface OperationSummaryProps {
   credit: number;
   debit: number;
   balance: number;
+  loading?: boolean;
 }
 
-export function OperationSummary({ credit, debit, balance }: OperationSummaryProps) {
+export function OperationSummary({ credit, debit, balance, loading }: OperationSummaryProps) {
+  if (loading) {
+    return (
+      <View className="flex-row justify-between bg-white rounded-2xl px-5 py-4 m-6" style={{ boxShadow: '4px 6px 7px 5px rgba(0, 0, 0, 0.07)' }}>
+        <Loading size="small" className="flex-1" />
+      </View>
+    );
+  }
+
   return (
     <View className="flex-row justify-between bg-white rounded-2xl px-5 py-4 m-6" style={{ boxShadow: '4px 6px 7px 5px rgba(0, 0, 0, 0.07)' }}>
       <View className="items-center">

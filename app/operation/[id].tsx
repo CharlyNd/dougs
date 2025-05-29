@@ -13,7 +13,7 @@ export default function OperationDetailScreen() {
     const { id, categoryId } = useLocalSearchParams();
     const navigation = useNavigation();
     const router = useRouter();
-    const { operations, categories } = useOperationStore();
+    const { operations, categories, groups } = useOperationStore();
 
     const operation = operations.find(op => String(op.id) === String(id));
 
@@ -45,6 +45,11 @@ export default function OperationDetailScreen() {
     const selectedCategory = categoryId
         ? categories.find(cat => String(cat.id) === String(categoryId))
         : categories.find(cat => String(cat.id) === String(operation.categoryId));
+
+    // Trouver le groupe de la catégorie sélectionnée
+    const selectedGroup = selectedCategory
+        ? groups.find(group => group.id === selectedCategory.groupId)
+        : undefined;
 
     const handleSave = async () => {
         if (categoryId) {
@@ -94,6 +99,7 @@ export default function OperationDetailScreen() {
                         });
                     }}
                     className="mb-6"
+                    color={selectedGroup?.color}
                 />
             </View>
             {/* Spacer */}

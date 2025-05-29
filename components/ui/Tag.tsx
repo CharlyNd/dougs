@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native';
 import Colors from '~/constants/Colors';
+import { useGroupStyle } from '~/hooks/useGroupStyle';
 
 interface TagProps {
   label: string;
@@ -8,20 +9,7 @@ interface TagProps {
 }
 
 export function Tag({ label, color, isDefault }: TagProps) {
-  const getGroupStyle = (colorName: string) => {
-    switch (colorName) {
-      case 'green':
-        return { bg: Colors.green.bg, text: Colors.green.textTag };
-      case 'blue':
-        return { bg: Colors.blue.bg, text: Colors.blue.text };
-      case 'purple':
-        return { bg: Colors.purple.bg, text: Colors.purple.text };
-      default:
-        return { bg: Colors.white.bg, text: Colors.labelSummary };
-    }
-  };
-
-  const style = color ? getGroupStyle(color) : { bg: Colors.white.bg, text: Colors.labelSummary };
+  const style = useGroupStyle(color);
 
   return (
     <View

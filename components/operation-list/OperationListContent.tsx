@@ -3,7 +3,7 @@ import { Item } from '../Item';
 import Colors from '~/constants/Colors';
 import type { Operation } from '~/types/types';
 import { router } from 'expo-router';
-import { OperationListHeader } from '../ListHeader';
+import { ListHeader } from '../ListHeader';
 import { Loading } from '../ui/Loading';
 import { useOperationStore } from '~/store/store';
 
@@ -33,7 +33,7 @@ export function OperationListContent({ listItems, onRefresh, refreshing, onEndRe
       keyExtractor={(item) => item.date}
       renderItem={({ item }) => (
         <View>
-          <OperationListHeader
+          <ListHeader
             label={new Date(item.date).toLocaleDateString('fr-FR', {
               day: 'numeric',
               month: 'long',

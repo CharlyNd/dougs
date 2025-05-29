@@ -3,7 +3,7 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { Item } from '~/components/Item';
 import { HeaderFilter } from '~/components/HeaderFilter';
-import { OperationListHeader } from '~/components/ListHeader';
+import { ListHeader } from '~/components/ListHeader';
 import { useOperationStore } from '~/store/store';
 import { fetchApi } from '~/hooks/api';
 import type { Category, CategoriesGroup } from '~/types/types';
@@ -83,7 +83,7 @@ export default function SelectCategoryScreen() {
 
   const renderGroup = ({ item: group }: { item: GroupedCategory }) => (
     <View>
-      <OperationListHeader
+      <ListHeader
         label={group.label}
         bgColor={group.color}
         textColor={group.color}

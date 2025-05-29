@@ -14,7 +14,7 @@ function resolveGroupColors(color?: string) {
   };
 }
 
-interface OperationListHeaderProps {
+interface ListHeaderProps {
   label: string;
   bgColor?: string;
   textColor?: string;
@@ -22,13 +22,13 @@ interface OperationListHeaderProps {
   rightLabelColor?: string;
 }
 
-export function OperationListHeader({
+export function ListHeader({
   label,
   bgColor,
   textColor,
   rightLabel,
   rightLabelColor,
-}: OperationListHeaderProps) {
+}: ListHeaderProps) {
   const { bg, text } = resolveGroupColors(bgColor);
 
   return (
